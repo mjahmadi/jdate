@@ -1,6 +1,21 @@
 # jdate
 The persian jalali calendar date tool for GNU command line.
- 
+
+```
+Display persian date in jalali calendar command line tool.
+Usage: ./jdate [OPTION]... [+FORMAT]
+  -h   --help          Display this usage information and exit.
+  -f   --format        Formats output with the given string.
+  -p   --pad           Pads numeric fields with zero.
+  -t   --timezone      Will calculate current date in persian jalali
+                       calendar in given timezone.
+  -j   --to-jalali     Converts given gregorian date to persian jalali date.
+  -g   --to-gregorian  Converts given persian jalali date to gregorian date.
+  -c   --compare       Display this usage information.
+  -r   --reference     Display the last modification time of given FILE
+                       in persian jalali calendar.
+       --version       Output version information and exit.
+```
 ## make
 
 ```
@@ -19,11 +34,11 @@ To get current persian jalali date issue the following:
 ```
 $ ./jdate 
 ```
-To convert gregorian date to persian jalali date issue the following:
+To convert persian jalali date to gregorian date issue the following:
 ```
 $ ./jdate -g 1395-09-20
 ```
-To convert persian jalali date to gregorian date issue the following:
+To convert gregorian date to persian jalali date issue the following:
 ```
 $ ./jdate -j 2016-12-20
 ```
