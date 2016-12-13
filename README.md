@@ -42,7 +42,7 @@ To convert gregorian date to persian jalali date issue the following:
 ```
 $ ./jdate -j 2016-12-20
 ```
-To compair two different persian jalali date issue the following:
+To compare two different persian jalali date issue the following:
 NOTE: The below command will return the bigger date.
 ```
 $ ./jdate -c 1395-09-10:1396-08-06
