@@ -43,6 +43,7 @@ $ ./jdate -j '2016-12-20'
 ```
 
 To compare two different persian jalali date issue the following:
+
 [NOTE: The below command will return the bigger date]
 ```
 $ ./jdate -c '1395-09-10:1396-08-06'
