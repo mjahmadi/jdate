@@ -1,6 +1,11 @@
 #ifndef _JDATE_H
 #define _JDATE_H
 
+const char *program_name = NULL;
+
+#include "helper.h"
+#include "about.h"
+
 #define true  1
 #define false 0
 
@@ -11,23 +16,166 @@ typedef struct {
 }jDate;
 
 
-int _div (int a, int b)
+char *persian_weekday_name (int weekday)
 {
-	return ((int)(a / b));
+	char *buf;
+	switch (weekday) {
+		case 1:
+			buf = "شنبه";
+			break;
+		case 2:
+			buf = "یکشنبه";
+			break;
+		case 3:
+			buf = "دوشنبه";
+			break;
+		case 4:
+			buf = "سه شنبه";
+			break;
+		case 5:
+			buf = "چهار شنبه";
+			break;
+		case 6:
+			buf = "پنجشنبه";
+			break;
+		case 7:
+			buf = "جمعه";
+			break;
+	}
+	
+	return buf;
 }
 
 
-char *_substring(char s[], int p, int l) {
-   int c = 0;
-   char *sub =  malloc(strlen(s) + 1);
- 
-   while (c < l) {
-      sub[c++] = s[p + c - 1];
-   }
-   
-   sub[c] = '\0';
-   
-   return sub;
+char *persian_weekday_abbreviation_name (int weekday)
+{
+	char *buf;
+	switch (weekday) {
+		case 1:
+			buf = "ش";
+			break;
+		case 2:
+			buf = "ی";
+			break;
+		case 3:
+			buf = "د";
+			break;
+		case 4:
+			buf = "س";
+			break;
+		case 5:
+			buf = "چ";
+			break;
+		case 6:
+			buf = "پ";
+			break;
+		case 7:
+			buf = "ج";
+			break;
+	}
+	
+	return buf + '\0';
+}
+
+
+char *persian_month_name (int month)
+{
+	char *buf;
+	switch (month) {
+		case 1:
+			buf = "فروردین";
+			break;
+		case 2:
+			buf = "اردیبهشت";
+			break;
+		case 3:
+			buf = "خرداد";
+			break;
+		case 4:
+			buf = "مرداد";
+			break;
+		case 5:
+			buf = "تیر";
+			break;
+		case 6:
+			buf = "شهریور";
+			break;
+		case 7:
+			buf = "مهر";
+			break;
+		case 8:
+			buf = "آبان";
+			break;
+		case 9:
+			buf = "آذر";
+			break;
+		case 10:
+			buf = "دی";
+			break;
+		case 11:
+			buf = "بهمن";
+			break;
+		case 12:
+			buf = "اسفند";
+			break;
+	}
+	
+	return buf;
+}
+
+
+void print_jdate (jDate jd, const char *fmt)
+{
+	int l = 0;
+	char *buf = malloc(sizeof(fmt) * 2);
+	
+	while (l <= strlen(fmt)) {
+	
+		switch (fmt[l]) {
+			case 'a':
+				break;
+				
+			case 'A':
+				break;
+				
+			case 'b':
+				buf = _strconcat(buf, persian_month_name(jd.month));
+				break;
+			case 'B':
+			
+				buf = _strconcat(buf, persian_month_name(jd.month));
+				break;
+				
+			case 'd':
+				buf = _strconcat(buf, _inttostr(jd.day));
+				break;
+				
+			case 'm':
+				buf = _strconcat(buf, _inttostr(jd.month));
+				break;
+				
+			case 'Y':
+				buf = _strconcat(buf, _inttostr(jd.year));
+				break;
+				
+			case 'j':
+				break;
+				
+			case 'u':
+				break;
+				
+			case 'U':
+				break;
+				
+			default:
+				buf = _append(buf, fmt[l]);
+				break;
+		}
+		
+		l++;
+	}
+	
+	printf("%s\n", buf);
 }
 
 
@@ -141,6 +289,27 @@ jDate gregorian_to_jalali (int g_y, int g_m, int g_d)
 	jdate.day   = jd;
 
 	return jdate;
+}
+
+jDate current_jalali_date (void)
+{
+	char cur_g_year[5],
+		 cur_g_month[3],
+		 cur_g_day[3];
+		 
+	time_t time_raw_format;
+	struct tm * ptr_time;
+
+	time(&time_raw_format);
+	ptr_time = localtime(&time_raw_format);
+	
+	strftime(cur_g_year, sizeof(cur_g_year), "%Y", ptr_time);
+	strftime(cur_g_month, sizeof(cur_g_month), "%m", ptr_time);
+	strftime(cur_g_day, sizeof(cur_g_day), "%d", ptr_time);
+	
+	return gregorian_to_jalali(atoi(cur_g_year), 
+							   atoi(cur_g_month),
+							   atoi(cur_g_day));
 }
 
 #endif //_JDATE_H
