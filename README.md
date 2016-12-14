@@ -1,5 +1,6 @@
 # jdate
 The persian jalali calendar date tool for GNU command line.
+Still needs some improvement and bug fix...
 
 ```
 Display persian date in jalali calendar command line tool.
@@ -53,6 +54,4 @@ $ ./jdate -f 'Y-m-d'
 ```
 
 Report bugs to mohammad.j.ahmadi@gmail.com
-
 Project home page: <https://github.com/MJAhmadi/jdate>
-
