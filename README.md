@@ -23,7 +23,7 @@ $ ./build.sh
 ## install
 
 ```
-$ cp ./jdate /usr/bin/jdate
+$ sudo ./install.sh
 ```
 
 ## usage
