@@ -7,9 +7,9 @@
 
 #include "jdate.h"
 
-int         default_padding  = true;
-const char *default_format   = "Y/m/d";
-const char *default_timezone = "Asia/Tehran";
+int         _padding  = true;
+const char *_format   = "";
+const char *_timezone = "Asia/Tehran";
 
 
 void print_error (const char *error_msg, int error_code)
@@ -52,11 +52,11 @@ int main (int argc, char *argv[])
 				break;
 				
 			case 'f':
-				default_format = argv[optind - 1];
+				_format = argv[optind - 1];
 				break;
 				
 			case 'p':
-				default_padding = false;
+				_padding = false;
 				break;
 				
 			case 'j':
@@ -128,9 +128,7 @@ int main (int argc, char *argv[])
 		jdate = current_jalali_date();
 	}
 	
-	print_jdate(jdate, default_format);
-	//jDate jd = current_jalali_date();
-	//printf("%d", jd.year);
+	print_jdate(jdate, _format);
 	
 	if (optind < argc) {
 		fprintf(stderr, "Expected argument after options.\n");

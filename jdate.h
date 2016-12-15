@@ -16,136 +16,16 @@ typedef struct {
 }jDate;
 
 
-char *persian_weekday_name (int weekday)
-{
-	char *buf;
-	switch (weekday) {
-		case 1:
-			buf = "شنبه";
-			break;
-		case 2:
-			buf = "یکشنبه";
-			break;
-		case 3:
-			buf = "دوشنبه";
-			break;
-		case 4:
-			buf = "سه شنبه";
-			break;
-		case 5:
-			buf = "چهار شنبه";
-			break;
-		case 6:
-			buf = "پنجشنبه";
-			break;
-		case 7:
-			buf = "جمعه";
-			break;
-	}
-	
-	return buf;
-}
-
-
-char *persian_weekday_abbreviation_name (int weekday)
-{
-	char *buf;
-	switch (weekday) {
-		case 1:
-			buf = "ش";
-			break;
-		case 2:
-			buf = "ی";
-			break;
-		case 3:
-			buf = "د";
-			break;
-		case 4:
-			buf = "س";
-			break;
-		case 5:
-			buf = "چ";
-			break;
-		case 6:
-			buf = "پ";
-			break;
-		case 7:
-			buf = "ج";
-			break;
-	}
-	
-	return buf + '\0';
-}
-
-
-char *persian_month_name (int month)
-{
-	char *buf;
-	switch (month) {
-		case 1:
-			buf = "فروردین";
-			break;
-		case 2:
-			buf = "اردیبهشت";
-			break;
-		case 3:
-			buf = "خرداد";
-			break;
-		case 4:
-			buf = "مرداد";
-			break;
-		case 5:
-			buf = "تیر";
-			break;
-		case 6:
-			buf = "شهریور";
-			break;
-		case 7:
-			buf = "مهر";
-			break;
-		case 8:
-			buf = "آبان";
-			break;
-		case 9:
-			buf = "آذر";
-			break;
-		case 10:
-			buf = "دی";
-			break;
-		case 11:
-			buf = "بهمن";
-			break;
-		case 12:
-			buf = "اسفند";
-			break;
-	}
-	
-	return buf;
-}
-
-
 void print_jdate (jDate jd, const char *fmt)
 {
 	int l = 0;
-	char *buf = malloc(sizeof(fmt) * 2);
+	char *buf = malloc(sizeof(fmt) * 10);
 	
-	while (l <= strlen(fmt)) {
+	buf[0] = '\0';
+	
+	while (l < strlen(fmt)) {
 	
 		switch (fmt[l]) {
-			case 'a':
-				break;
-				
-			case 'A':
-				break;
-				
-			case 'b':
-				buf = _strconcat(buf, persian_month_name(jd.month));
-				break;
-			case 'B':
-			
-				buf = _strconcat(buf, persian_month_name(jd.month));
-				break;
-				
 			case 'd':
 				buf = _strconcat(buf, _inttostr(jd.day));
 				break;
@@ -154,7 +34,7 @@ void print_jdate (jDate jd, const char *fmt)
 				buf = _strconcat(buf, _inttostr(jd.month));
 				break;
 				
-			case 'Y':
+			case 'y':
 				buf = _strconcat(buf, _inttostr(jd.year));
 				break;
 				
@@ -171,11 +51,10 @@ void print_jdate (jDate jd, const char *fmt)
 				buf = _append(buf, fmt[l]);
 				break;
 		}
-		
 		l++;
 	}
 	
-	printf("%s\n", buf);
+	puts(buf);
 }
 
 

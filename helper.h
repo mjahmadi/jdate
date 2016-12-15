@@ -26,14 +26,14 @@ char *_substring (char s[], int p, int l)
 }
 
 
-char *_strconcat (const char *s1, const char *s2)
+char *_strconcat (char *s1, const char *s2)
 {
-	char *result = malloc(strlen(s1) + strlen(s2) + 1);
+	char *result = malloc(sizeof(s1) + sizeof(s2) + 1);
 	
 	strcpy(result, s1);
-	strcat(result, s2);
+	strcat(s1, s2);
 	
-	return result;
+	return s1;
 }
 
 
