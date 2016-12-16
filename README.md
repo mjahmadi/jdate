@@ -1,18 +1,49 @@
 # jdate
 The persian jalali calendar date tool for GNU command line.
+
 Still needs some improvement and bug fix...
 
 ```
 Display persian date in jalali calendar command line tool.
-Usage: ./jdate [OPTION]... [+FORMAT]
-  -h   --help          Display this usage information and exit.
+Usage: jdate [OPTION]... [+FORMAT]
   -f   --format        Formats output with the given pattern.
-  -p   --no-pad        Won't pad numeric fields with zero.
   -j   --to-jalali     Converts given gregorian date to persian jalali date.
+                       The format must be like this: 'YYYY-MM-DD'
   -g   --to-gregorian  Converts given persian jalali date to gregorian date.
+                       The format must be like this: 'YYYY-MM-DD'
   -c   --compare       Will compare two different persian jalali date.
-                       this option returns the bigger date. [YYYY-MM-DD:YYYY-MM-DD]
+                       this option returns the bigger date.
+                       The format must be like this: 'YYYY-MM-DD:YYYY-MM-DD'
+       --help          Display this usage information and exit.
        --version       Output version information and exit.
+
+FORMAT controls the output. Interpreted sequences are:
+  '%d'   day of month (e.g., 14).
+  '%D'   day of month with padding zero (e.g., 05).
+  '%m'   month (1..12).
+  '%M'   month with padding zero (01..12).
+  '%y'   Two digit year with padding zero.
+  '%Y'   Four digit year.
+  '%j'   day of year (001..366).
+  '%u'   day of week (1..7).
+  '%U'   week number of year.
+
+Examples:
+   To get current persian jalali date issue the following:
+
+   $ jdate 
+
+   To convert persian jalali date to gregorian date issue the following:
+
+   $ jdate -g '1395-09-20'
+
+   To convert gregorian date to persian jalali date issue the following:
+
+   $ jdate -j '2016-12-20'
+
+   To change the format of the output issue the following:
+
+   $ jdate -f '%y-%m-%d' 
 ```
 ## make
 
@@ -20,7 +51,7 @@ Usage: ./jdate [OPTION]... [+FORMAT]
 $ ./build.sh
 ```
 
-## install
+## optional install
 
 ```
 $ sudo ./install.sh
