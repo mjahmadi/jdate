@@ -1,140 +1,88 @@
-#include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <getopt.h>
 #include <time.h>
 #include <string.h>
-#include <unistd.h>
 
+
+#include "helper.h"
 #include "jdate.h"
-
-int         _padding  = true;
-const char *_format   = "";
-const char *_timezone = "Asia/Tehran";
+#include "about.h"
+#include "funcs.h"
 
 
-void print_error (const char *error_msg, int error_code)
-{
-	fprintf (stderr, "Error: %d - %s\n", error_code, error_msg);
-	exit(error_code);
-}
+char *_format = "%Y-%M-%D";
 
 
 int main (int argc, char *argv[])
 {
 	int opt;
 	
-	const char *short_options = "hf:p:j:g:c:";
+	const char *short_options = "f:j:g:c:";
 	const struct option long_options[] = {
 		{ "help",			0, NULL, 'h' },
 		{ "format",			1, NULL, 'f' },
-		{ "no-pad",			0, NULL, 'p' },
 		{ "to-jalali",		1, NULL, 'j' },
 		{ "to-gregorian",	1, NULL, 'g' },
 		{ "compare",		1, NULL, 'c' },
-		{ "version",		0, NULL, 'V' },
+		{ "version",		0, NULL, 'v' },
 		{  NULL,			0, NULL,  0  }
 	};
 	
-	int compare_condition;
-	int tmp_year1, tmp_year2,
-		tmp_month1, tmp_month2,
-		tmp_day1, tmp_day2;
-		
-	jDate jdate;
+	jDate _jdate = get_cur_jdate();
 	
-	program_name = argv[0];
-	
-	while ((opt = getopt_long(argc, argv, short_options, long_options, NULL))
-			 != -1) {
+	while ((opt = getopt_long(argc, argv, short_options, long_options, NULL)) != -1) {
 		switch (opt) {
+			//--help
 			case 'h':
 				print_usage(stdout, EXIT_SUCCESS);
 				break;
 				
+			//--format
 			case 'f':
 				_format = argv[optind - 1];
 				break;
 				
-			case 'p':
-				_padding = false;
-				break;
-				
+			//--to-jalali
 			case 'j':
-				tmp_year1  = atoi(_substring(argv[optind - 1], 0, 4));
-				tmp_month1 = atoi(_substring(argv[optind - 1], 5, 2));
-				tmp_day1   = atoi(_substring(argv[optind - 1], 8, 2));
-				jdate      = gregorian_to_jalali (tmp_year1, tmp_month1, tmp_day1);
+				_jdate = gregorian_to_jalali(atoi(_substring(argv[optind - 1], 0, 4)),
+										     atoi(_substring(argv[optind - 1], 5, 2)),
+											 atoi(_substring(argv[optind - 1], 8, 2)));
 				break;
 				
+			//--to-gregorian
 			case 'g':
-				tmp_year1  = atoi(_substring(argv[optind - 1], 0, 4));
-				tmp_month1 = atoi(_substring(argv[optind - 1], 5, 2));
-				tmp_day1   = atoi(_substring(argv[optind - 1], 8, 2));
-				jdate      = jalali_to_gregorian (tmp_year1, tmp_month1, tmp_day1);
+				_jdate = jalali_to_gregorian(atoi(_substring(argv[optind - 1], 0, 4)),
+										     atoi(_substring(argv[optind - 1], 5, 2)),
+											 atoi(_substring(argv[optind - 1], 8, 2)));
 				break;
 				
+			//--compare
 			case 'c':
-				tmp_year1  = atoi(_substring(argv[optind - 1], 0, 4));
-				tmp_month1 = atoi(_substring(argv[optind - 1], 5, 2));
-				tmp_day1   = atoi(_substring(argv[optind - 1], 8, 2));
-				
-				tmp_year2  = atoi(_substring(argv[optind - 1], 11, 4));
-				tmp_month2 = atoi(_substring(argv[optind - 1], 16, 2));
-				tmp_day2   = atoi(_substring(argv[optind - 1], 19, 2));
-				
-				if (tmp_year1 == tmp_year2) {
-					if (tmp_month1 == tmp_month2) {
-						if (tmp_day1 == tmp_day2) {
-							compare_condition = true;
-						} else if (tmp_day1 > tmp_day2) {
-							compare_condition = true;
-						} else if (tmp_day1 < tmp_day2) {
-							compare_condition = false;
-						}
-					} else if (tmp_month1 > tmp_month2) {
-						compare_condition = true;
-					} else if (tmp_month1 < tmp_month2) {
-						compare_condition = false;
-					}
-				} else if (tmp_year1 > tmp_year2) {
-					compare_condition = true;
-				} else if (tmp_year1 < tmp_year2) {
-					compare_condition = false;
-				}
-				
-				if (compare_condition) {
-					jdate.year  = tmp_year1;
-					jdate.month = tmp_month1;
-					jdate.day   = tmp_day1;
-				} else {
-					jdate.year  = tmp_year2;
-					jdate.month = tmp_month2;
-					jdate.day   = tmp_day2;
-				}
-				
+				_jdate = compare_jdate(argv[optind - 1]);
 				break;
 				
-			case 'V':
+			//--version
+			case 'v':
 				print_version();
 				break;
 				
 			default:
 				print_usage(stderr, EXIT_FAILURE);
+				exit(EXIT_SUCCESS);
 				break;
 		}
 	}
 	
-	if (argc <= 1) {
-		jdate = current_jalali_date();
-	}
-	
-	print_jdate(jdate, _format);
+	print_jdate(_jdate, _format);
 	
 	if (optind < argc) {
 		fprintf(stderr, "Expected argument after options.\n");
 		exit(EXIT_FAILURE);
 	}
+
 	
-	exit(EXIT_SUCCESS);
+	return EXIT_SUCCESS;
 }
 

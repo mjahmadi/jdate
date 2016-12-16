@@ -1,68 +1,24 @@
 #ifndef _JDATE_H
 #define _JDATE_H
 
-const char *program_name = NULL;
+#define PROGRAM_NAME "jdate"
+#define VERSION      "0.0.1"
 
-#include "helper.h"
-#include "about.h"
-
-#define true  1
-#define false 0
-
-typedef struct {
-	int year,
-		month,
-		day;
+typedef struct
+{
+	char *year,
+	     *month,
+	     *day;
 }jDate;
 
 
-void print_jdate (jDate jd, const char *fmt)
-{
-	int l = 0;
-	char *buf = malloc(sizeof(fmt) * 10);
-	
-	buf[0] = '\0';
-	
-	while (l < strlen(fmt)) {
-	
-		switch (fmt[l]) {
-			case 'd':
-				buf = _strconcat(buf, _inttostr(jd.day));
-				break;
-				
-			case 'm':
-				buf = _strconcat(buf, _inttostr(jd.month));
-				break;
-				
-			case 'y':
-				buf = _strconcat(buf, _inttostr(jd.year));
-				break;
-				
-			case 'j':
-				break;
-				
-			case 'u':
-				break;
-				
-			case 'U':
-				break;
-				
-			default:
-				buf = _append(buf, fmt[l]);
-				break;
-		}
-		l++;
-	}
-	
-	puts(buf);
-}
+int g_days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+int j_days_in_month[] = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
 
 
 jDate jalali_to_gregorian(int j_y, int j_m, int j_d)
 {
 	int i;
-	int g_days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	int j_days_in_month[] = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
 	int jy = j_y - 979;
 	int jm = j_m - 1;
 	int jd = j_d - 1;
@@ -111,9 +67,9 @@ jDate jalali_to_gregorian(int j_y, int j_m, int j_d)
 	int gd = g_day_no + 1;
 	
 	jDate jdate;
-	jdate.year  = gy;
-	jdate.month = gm;
-	jdate.day   = gd;
+	jdate.year  = _inttostr(gy);
+	jdate.month = _inttostr(gm);
+	jdate.day   = _inttostr(gd);
 	
 	return jdate;
 }
@@ -122,8 +78,6 @@ jDate jalali_to_gregorian(int j_y, int j_m, int j_d)
 jDate gregorian_to_jalali (int g_y, int g_m, int g_d)
 {
 	int i;
-	int g_days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	int j_days_in_month[] = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
 	int gy = g_y - 1600;
 	int gm = g_m - 1;
 	int gd = g_d - 1;
@@ -163,33 +117,13 @@ jDate gregorian_to_jalali (int g_y, int g_m, int g_d)
 	int jd = j_day_no + 1;
 
 	jDate jdate;
-	jdate.year  = jy;
-	jdate.month = jm;
-	jdate.day   = jd;
+	jdate.year  = _inttostr(jy);
+	jdate.month = _inttostr(jm);
+	jdate.day   = _inttostr(jd);
 
 	return jdate;
 }
 
-jDate current_jalali_date (void)
-{
-	char cur_g_year[5],
-		 cur_g_month[3],
-		 cur_g_day[3];
-		 
-	time_t time_raw_format;
-	struct tm * ptr_time;
-
-	time(&time_raw_format);
-	ptr_time = localtime(&time_raw_format);
-	
-	strftime(cur_g_year, sizeof(cur_g_year), "%Y", ptr_time);
-	strftime(cur_g_month, sizeof(cur_g_month), "%m", ptr_time);
-	strftime(cur_g_day, sizeof(cur_g_day), "%d", ptr_time);
-	
-	return gregorian_to_jalali(atoi(cur_g_year), 
-							   atoi(cur_g_month),
-							   atoi(cur_g_day));
-}
 
 #endif //_JDATE_H
 
