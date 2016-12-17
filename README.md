@@ -20,10 +20,10 @@ FORMAT controls the output. Interpreted sequences are:
   '%A'   locale's full weekday name.
   '%B'   locale's full month name.
   '%d'   day of month (e.g., 14).
-  '%D'   day of month with padding zero (e.g., 05).
+  '%D'   day of month with leading zero (e.g., 05).
   '%m'   month (1..12).
-  '%M'   month with padding zero (01..12).
-  '%y'   Two digit year with padding zero.
+  '%M'   month with leading zero (01..12).
+  '%y'   Two digit year with leading zero.
   '%Y'   Four digit year.
   '%j'   day of year (001..366).
   '%u'   day of week (1..7).
