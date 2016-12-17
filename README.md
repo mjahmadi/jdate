@@ -16,6 +16,9 @@ Usage: jdate [OPTION]... [+FORMAT]
        --version       Output version information and exit.
 
 FORMAT controls the output. Interpreted sequences are:
+  '%a'   locale's abbreviated weekday name.
+  '%A'   locale's full weekday name.
+  '%B'   locale's full month name.
   '%d'   day of month (e.g., 14).
   '%D'   day of month with padding zero (e.g., 05).
   '%m'   month (1..12).
