@@ -16,6 +16,114 @@ int g_days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 int j_days_in_month[] = {31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29};
 
 
+char *persian_weekday_name (int weekday)
+{
+	char *buf;
+	switch (weekday) {
+		case 1:
+			buf = "شنبه";
+			break;
+		case 2:
+			buf = "یکشنبه";
+			break;
+		case 3:
+			buf = "دوشنبه";
+			break;
+		case 4:
+			buf = "سه شنبه";
+			break;
+		case 5:
+			buf = "چهار شنبه";
+			break;
+		case 6:
+			buf = "پنجشنبه";
+			break;
+		case 7:
+			buf = "جمعه";
+			break;
+	}
+	
+	return buf;
+}
+
+
+char *persian_weekday_abbreviation_name (int weekday)
+{
+	char *buf;
+	switch (weekday) {
+		case 1:
+			buf = "ش";
+			break;
+		case 2:
+			buf = "ی";
+			break;
+		case 3:
+			buf = "د";
+			break;
+		case 4:
+			buf = "س";
+			break;
+		case 5:
+			buf = "چ";
+			break;
+		case 6:
+			buf = "پ";
+			break;
+		case 7:
+			buf = "ج";
+			break;
+	}
+	
+	return buf + '\0';
+}
+
+ 
+char *persian_month_name (int month)
+{
+	char *buf;
+	switch (month) {
+		case 1:
+			buf = "فروردین";
+			break;
+		case 2:
+			buf = "اردیبهشت";
+			break;
+		case 3:
+			buf = "خرداد";
+			break;
+		case 4:
+			buf = "مرداد";
+			break;
+		case 5:
+			buf = "تیر";
+			break;
+		case 6:
+			buf = "شهریور";
+			break;
+		case 7:
+			buf = "مهر";
+			break;
+		case 8:
+			buf = "آبان";
+			break;
+		case 9:
+			buf = "آذر";
+			break;
+		case 10:
+			buf = "دی";
+			break;
+		case 11:
+			buf = "بهمن";
+			break;
+		case 12:
+			buf = "اسفند";
+			break;
+	}
+	
+	return buf;
+}
+
+
 jDate jalali_to_gregorian(int j_y, int j_m, int j_d)
 {
 	int i;

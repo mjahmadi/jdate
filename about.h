@@ -39,6 +39,9 @@ void print_usage(FILE* stream, int exit_code)
 				"       --version       Output version information and exit.\n\n"
 				
 				"FORMAT controls the output. Interpreted sequences are:\n"
+				"  '%%a'   locale's abbreviated weekday name.\n"
+				"  '%%A'   locale's full weekday name.\n"
+				"  '%%B'   locale's full month name.\n"
 				"  '%%d'   day of month (e.g., 14).\n"
 				"  '%%D'   day of month with padding zero (e.g., 05).\n"
 				"  '%%m'   month (1..12).\n"

@@ -34,15 +34,38 @@ jDate get_cur_jdate (void)
 
 void print_jdate (jDate jd, char *fmt)
 {
-	int l = 0;
+	int l = 0, i = 0, day_of_year = 0, weekday = 0, week_number = 0;
 	char *buf = malloc(sizeof(char) * 4096);
 	
 	buf[0] = '\0';
 	
+	
+	
+	day_of_year = 0;
+	for (i = 0; i < atoi(jd.month) - 1; i++) {
+		day_of_year += j_days_in_month[i];
+	}
+	
+	day_of_year += atoi(jd.day);
+	weekday      = (day_of_year % 7) + 1;
+	week_number  = _div(day_of_year, 7) + 1;
+
 	while (l < strlen(fmt)) {
 	
 		if (fmt[l] == '%') {
 			switch (fmt[l+1]) {
+				case 'a':
+					buf = _strconcat(buf, persian_weekday_abbreviation_name(weekday));
+					break;
+				
+				case 'A':
+					buf = _strconcat(buf, persian_weekday_name(weekday));
+					break;
+				
+				case 'B':
+					buf = _strconcat(buf, persian_month_name(atoi(jd.month)));
+					break;
+				
 				case 'd':
 					buf = _strconcat(buf, jd.day);
 					break;
@@ -80,12 +103,15 @@ void print_jdate (jDate jd, char *fmt)
 					break;
 				
 				case 'j':
+					buf = _strconcat(buf, _inttostr(day_of_year));
 					break;
 				
 				case 'u':
+					buf = _strconcat(buf, _inttostr(weekday));
 					break;
 				
 				case 'U':
+					buf = _strconcat(buf, _inttostr(week_number));
 					break;
 				
 				default:
