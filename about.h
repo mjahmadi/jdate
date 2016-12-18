@@ -1,23 +1,24 @@
 /*
 	about.h
-	
-	
+
+
 	This file is part of JDate project.
 	JDate is a persian jalali calendar date tool for GNU command line. 
 
-    JDate is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+	JDate is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-    JDate is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	JDate is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
+
 
 #ifndef _ABOUT_H
 #define _ABOUT_H
@@ -57,8 +58,10 @@ void print_usage(FILE* stream, int exit_code)
 				"                          this option returns the bigger date.\n"
 				"                          The format must be like this: 'YYYY-MM-DD:YYYY-MM-DD'\n"
 				"  -r   --reference        Display the last modification time of FILE in jalali date.\n"
+				/*TODO
 				"  -d   --difference       Returns the number of days between two persian jalali date.\n"
 				"                          The format must be like this: 'YYYY-MM-DD:YYYY-MM-DD'\n"
+				*/
 				"       --help             Display this usage information and exit.\n"
 				"       --version          Output version information and exit.\n\n"
 				
