@@ -28,23 +28,6 @@ FORMAT controls the output. Interpreted sequences are:
   '%j'   day of year (001..366).
   '%u'   day of week (1..7).
   '%U'   week number of year.
-
-Examples:
-   To get current persian jalali date issue the following:
-
-   $ jdate 
-
-   To convert persian jalali date to gregorian date issue the following:
-
-   $ jdate -g '1395-09-20'
-
-   To convert gregorian date to persian jalali date issue the following:
-
-   $ jdate -j '2016-12-20'
-
-   To change the format of the output issue the following:
-
-   $ jdate -f '%y-%m-%d' 
 ```
 ## make
 
