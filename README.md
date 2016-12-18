@@ -85,3 +85,8 @@ To change the format of the output issue the following:
 ```
 $ ./jdate -f 'Y-m-d'
 ```
+
+To get last modification date in persian jalali calendar issue the following:
+```
+$ ./jdate -r '~/PATH/FILE.TXT'
+```
