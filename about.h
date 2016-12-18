@@ -87,7 +87,10 @@ void print_usage(FILE* stream, int exit_code)
 				"   $ %s -j '2016-12-20'\n\n"
 				
 				"   To change the format of the output issue the following:\n\n"
-				"   $ %s -f '%%y-%%m-%%d' \n\n", PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME);
+				"   $ %s -f '%%y-%%m-%%d' \n\n"
+			 
+				"   To get last modification date in persian jalali calendar issue the following:\n\n"
+				"   $ ./jdate -r '~/PATH/FILE.TXT'\n\n", PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME);
 				
 		fprintf (stream, "Report bugs to mohammad.j.ahmadi@gmail.com\n"
 						 "Project home page: <https://github.com/MJAhmadi/jdate>\n\n");
