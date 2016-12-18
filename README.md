@@ -4,17 +4,18 @@ The persian jalali calendar date tool for GNU command line. still needs some imp
 ```
 Display persian date in jalali calendar command line tool.
 Usage: jdate [OPTION]... [+FORMAT]
-  -f   --format        Formats output with the given pattern.
-  -j   --to-jalali     Converts given gregorian date to persian jalali date.
-                       The format must be like this: 'YYYY-MM-DD'
-  -g   --to-gregorian  Converts given persian jalali date to gregorian date.
-                       The format must be like this: 'YYYY-MM-DD'
-  -c   --compare       Will compare two different persian jalali date.
-                       this option returns the bigger date.
-                       The format must be like this: 'YYYY-MM-DD:YYYY-MM-DD'
-       --help          Display this usage information and exit.
-       --version       Output version information and exit.
-
+  -f   --format           Formats output with the given pattern.
+  -j   --to-jalali        Converts given gregorian date to persian jalali date.
+                          The format must be like this: 'YYYY-MM-DD'
+  -g   --to-gregorian     Converts given persian jalali date to gregorian date.
+                          The format must be like this: 'YYYY-MM-DD'
+  -c   --compare          Will compare two different persian jalali date.
+                          this option returns the bigger date.
+                          The format must be like this: 'YYYY-MM-DD:YYYY-MM-DD'
+  -r   --reference        Display the last modification time of FILE in jalali date.
+       --help             Display this usage information and exit.
+       --version          Output version information and exit.
+       
 FORMAT controls the output. Interpreted sequences are:
   '%a'   locale's abbreviated weekday name.
   '%A'   locale's full weekday name.
