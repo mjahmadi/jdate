@@ -1,10 +1,31 @@
+/*
+	main.c
+	
+	
+	This file is part of JDate project.
+	JDate is a persian jalali calendar date tool for GNU command line. 
+
+    JDate is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JDate is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+#include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <getopt.h>
 #include <time.h>
 #include <string.h>
-
 
 #include "helper.h"
 #include "jdate.h"
@@ -19,13 +40,15 @@ int main (int argc, char *argv[])
 {
 	int opt;
 	
-	const char *short_options = "f:j:g:c:";
+	const char *short_options = "f:j:g:c:r:d:";
 	const struct option long_options[] = {
 		{ "help",			0, NULL, 'h' },
 		{ "format",			1, NULL, 'f' },
 		{ "to-jalali",		1, NULL, 'j' },
 		{ "to-gregorian",	1, NULL, 'g' },
 		{ "compare",		1, NULL, 'c' },
+		{ "reference",		1, NULL, 'r' },
+		{ "datediff",		1, NULL, 'd' },
 		{ "version",		0, NULL, 'v' },
 		{  NULL,			0, NULL,  0  }
 	};
@@ -61,6 +84,20 @@ int main (int argc, char *argv[])
 			//--compare
 			case 'c':
 				_jdate = compare_jdate(argv[optind - 1]);
+				break;
+				
+			//--reference
+			case 'r':
+				if (file_exist(argv[optind - 1])) {
+					_jdate = file_modification_date(argv[optind - 1]);				
+				} else {
+					print_error("Referenced file does not exist.", 1);
+				}
+				break;
+				
+			//-FIXME --difference
+			case 'd':
+				//_jdate = jdate_difference(argv[optind - 1]);				
 				break;
 				
 			//--version

@@ -1,5 +1,33 @@
+/*
+	funcs.h
+	
+	
+	This file is part of JDate project.
+	JDate is a persian jalali calendar date tool for GNU command line. 
+
+    JDate is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    JDate is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef _FUNCS_H
 #define _FUNCS_H
+
+
+void print_error (char *error_msg, int error_code)
+{
+	fprintf(stderr, "Error %02d: %s\n", error_code, error_msg);
+	exit(EXIT_FAILURE);
+}
 
 
 jDate get_cur_gdate (void)
@@ -181,6 +209,53 @@ jDate compare_jdate (char *str)
 	
 	return j;
 }
+
+
+int jdate_difference (char *str)
+{
+	jDate jd;
+	
+	int tmp_year1,  tmp_year2,
+	    tmp_month1, tmp_month2,
+	    tmp_day1,   tmp_day2;
+	
+	tmp_year1  = atoi(_substring(str,  0, 4));
+	tmp_month1 = atoi(_substring(str,  5, 2));
+	tmp_day1   = atoi(_substring(str,  8, 2));
+	
+	tmp_year2  = atoi(_substring(str, 11, 4));
+	tmp_month2 = atoi(_substring(str, 16, 2));
+	tmp_day2   = atoi(_substring(str, 19, 2));
+	
+	jd.year  = _inttostr(tmp_year1);
+	jd.month = _inttostr(tmp_month1);
+	jd.day   = _inttostr(tmp_day1);
+	
+	//TODO
+	
+	return 0;
+}
+
+
+jDate file_modification_date (char *filename)
+{
+	jDate jd;
+	jd.day   = malloc(sizeof(char*));
+	jd.month = malloc(sizeof(char*));
+	jd.year  = malloc(sizeof(char*));
+	
+	struct tm *foo;
+	struct stat attrib;
+
+	stat(filename, &attrib);
+	
+	strftime(jd.day,   sizeof(jd.day),   "%d", localtime(&(attrib.st_ctime)));
+	strftime(jd.month, sizeof(jd.month), "%m", localtime(&(attrib.st_ctime)));
+	strftime(jd.year,  sizeof(jd.year),  "%Y", localtime(&(attrib.st_ctime)));	
+	
+	return gregorian_to_jalali(atoi(jd.year), atoi(jd.month), atoi(jd.day));
+}
+
 
 #endif //_FUNCS_H
 
