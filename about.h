@@ -93,7 +93,7 @@ void print_usage(FILE* stream, int exit_code)
 				"   $ %s -f '%%y-%%m-%%d' \n\n"
 			 
 				"   To get last modification date in persian jalali calendar issue the following:\n\n"
-				"   $ ./jdate -r '~/PATH/FILE.TXT'\n\n", PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME);
+				"   $ ./jdate -r '~/PATH/TO/FILE'\n\n", PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME, PROGRAM_NAME);
 				
 		fprintf (stream, "Report bugs to mohammad.j.ahmadi@gmail.com\n"
 						 "Project home page: <https://github.com/MJAhmadi/jdate>\n\n");
