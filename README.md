@@ -1,6 +1,5 @@
 # [DEPRECATED/INACTIVE PROJECT]
-Please goto this new one...
-[Contribution guidelines for this project](docs/CONTRIBUTING.md)
+[Please goto this new one...](https://github.com/mjahmadi/pjdate)
 
 # jdate
 The persian jalali calendar date tool for GNU command line. still needs some improvement and bug fix...
